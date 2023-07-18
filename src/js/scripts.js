@@ -106,6 +106,21 @@ async function main() {
     // Similarly, any whitespace (space, tab, linebreak) will cause comparisons to return false. Remove them with trim(). Note this won't affect "double-spaces" where the user accidentally hit spacebar twice.
     output("Hello" == "Hello ");
     output("Hello" == "Hello ".trim());
+
+    output("--- Ternary Expressions ---");
+    const timeHour = 14;
+    // Ternary expressions have 3 sections:
+    // 1: The boolean expression.
+    // Separator ?
+    // 2: The value to return from the expression if section 1 is true.
+    // Separator :
+    // 3: The value to return from the expression if section 1 is false.
+    output(timeHour <= 12 ? "Good Morning" : "Good Afternoon");
+    output(`Good ${timeHour <= 12 ? "Morning" : "Afternoon"}`);
+
+    // Ternary expressions can be injected into compound expressions to "replace" values depending on another condition.
+    // Note that having all literal values like this would never happen in real solutions, there would be variables in here - this is just for problem solving practice.
+    output((3.14 <= 5 && "1" === 1 || (1 == (1 > 2 ? 1 == 1 : 2 > 5) && 9 % 2 >= 1)) && (5.5 <= 5.4 || (16/3 < 5)));
 }
 
 
