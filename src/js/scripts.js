@@ -121,6 +121,100 @@ async function main() {
     // Ternary expressions can be injected into compound expressions to "replace" values depending on another condition.
     // Note that having all literal values like this would never happen in real solutions, there would be variables in here - this is just for problem solving practice.
     output((3.14 <= 5 && "1" === 1 || (1 == (1 > 2 ? 1 == 1 : 2 > 5) && 9 % 2 >= 1)) && (5.5 <= 5.4 || (16/3 < 5)));
+
+    output("--- If / Else Decisions ---");
+
+    let userName = await input("Please enter your name: ");
+    if (userName.trim() == "")
+    {
+        output("You didn't enter a name! You get one more chance.");
+        userName = await input("Please enter your name (final chance): ");
+        if (userName.trim() == "") 
+        {
+            output("You have failed to enter your name. Dissapointing.");
+        }
+        else
+        {
+            output(`Hello, ${userName}!`);
+        }
+    }
+    else
+    {
+        output("Good job on entering your name!");
+        output(`Hello, ${userName}!`);
+    }
+    output("Fin.");
+
+    const myNumber = 5;
+
+    if (myNumber > 0)
+    {
+        output("It's positive!");
+    }
+    else
+    {
+        if (myNumber < 0)
+        {
+            output("It's negative!");
+        }
+        else
+        {
+            output("It's zero!");
+        }
+    }
+
+    // Pseudo multi-branch decision.
+    // Any time your condition requires expressions, use this.
+    if (myNumber > 0)
+    {
+        output("It's positive!");
+    }
+    else if (myNumber < 0)
+    {
+        output("It's negative!");
+    }
+    else
+    {
+        output("It's zero!");
+    }
+
+    // If your condition is purely equivalency with discrete values.
+    switch (myNumber)
+    {
+        case 1:
+        case 2:
+            output("It's one or two!");
+            break;
+        case 3:
+            output("It's three!");
+            break;
+        case 4:
+            output("It's four!");
+            break;
+        default: 
+            output("I don't know what it is!");
+            break;
+    }
+
+    // This is the same as the above switch.
+    if (myNumber == 1 || myNumber == 2)
+    {
+        output("It's one or two!");
+    }
+    else if (myNumber == 3)
+    {
+        output("It's three!");
+    }
+    else if (myNumber == 4)
+    {
+        output("It's four!");
+    }
+    else
+    {
+        output("I don't know what it is!");
+    }
+
+    
 }
 
 
