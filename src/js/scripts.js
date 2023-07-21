@@ -1,14 +1,10 @@
 async function main() {
-    // This is where the code you're actually experimenting with goes.
-    
-    let prompt = "Please enter your name, or 'Exit' to quit: "
-    let name = await input(prompt);
+    const a = await input("Please enter a side of the triangle: ");
+    const b = await input("Please enter another side of the triangle: ");
 
-    while (name != "Exit") 
-    {
-        output("Hello, "+name+"!");
-        name = await input(prompt);
-    }
+    const c = Math.sqrt(a**2 + b**2);
+
+    output(c);
 }
 
 
