@@ -1,14 +1,21 @@
 async function main() {
-    // This is where the code you're actually experimenting with goes.
-    
-    let prompt = "Please enter your name, or 'Exit' to quit: "
-    let name = await input(prompt);
 
-    while (name != "Exit") 
+    let name = await input("Please enter your name: ");
+    let age = await input("Please enter your age: ");
+
+    try 
     {
-        output("Hello, "+name+"!");
-        name = await input(prompt);
+        if (age < 18)
+        {
+            throw "You have entered an age that is insufficient for access to this resource.";
+        }
     }
+    catch (exception)
+    {
+        output("Oops. An error occured.");
+        output(exception);
+    }
+    output("We're done.");
 }
 
 
