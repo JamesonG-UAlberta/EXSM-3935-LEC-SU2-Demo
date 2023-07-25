@@ -7,14 +7,16 @@ async function main() {
     {
         if (age < 18)
         {
-            throw "You have entered an age that is insufficient for access to this resource.";
+            
+            throw Error("You have entered an age that is insufficient for access to this resource.");
         }
     }
     catch (exception)
     {
-        output("Oops. An error occured.");
         output(exception);
     }
+    
+
     output("We're done.");
 }
 
