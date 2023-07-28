@@ -6,9 +6,6 @@ async function main() {
     let discountPercentage;
     switch (discountCode) 
     {
-        case "0": 
-            discountPercentage = 0;
-            break;
         case "1": 
             discountPercentage = 0.1;
             break;
@@ -25,8 +22,9 @@ async function main() {
             discountPercentage = 0.40;
             break;
         default: 
-            discountPercentage = 0;
             output("Invalid discount code entered. No discount applied.");
+        case "0": 
+            discountPercentage = 0;
             break;
     }
     const discountedCost = costOfGoods*(1-discountPercentage);
