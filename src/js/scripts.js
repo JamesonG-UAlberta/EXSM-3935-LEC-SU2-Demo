@@ -11,6 +11,17 @@ async function main() {
     output(valuesInSet.next().value);
     output(valuesInSet.next().value);
     output(valuesInSet.next().value);
+
+
+    const myArray = ["John", "Joe", "Sue", "Joe", "John", "Tom", "Joe"];
+
+    const mySetFromArray = new Set(myArray);
+    const valuesInSetFromArray = mySetFromArray.values();
+    output(valuesInSetFromArray.next().value);
+    output(valuesInSetFromArray.next().value);
+    output(valuesInSetFromArray.next().value);
+    output(valuesInSetFromArray.next().value);
+    output(valuesInSetFromArray.next().value);
 }
 
 
