@@ -1,51 +1,28 @@
 async function main() {
-    // let myArray = ["First Item", "Second Item", "Third Item"];
-    const myArray = [];
+    let myDictionary = {
+        Hello: "A greeting when you see somebody.",
+        Goodbye: "What you say when you leave.",
+        Pen: "A writing utensil using ink.",
+        Pencil: "A writing utensil using graphite."
+    }
 
-    // myArray.push(await input("Please enter the first name: "));
-    // myArray.push(await input("Please enter the second name: "));
-    // myArray.push(await input("Please enter the third name: "));
-    myArray.push("James");
-    myArray.push("John");
-    myArray.push("Sue");
+    output(myDictionary.Hello);
+    output(myDictionary["Hello"]);
 
+    let myDictionaryNumbers = {
+        Pi: 3.14,
+        Array: [1, 2, 3, 5, 7, 9, 11, 15],
+        Boolean: false
+    }
 
-    output(myArray[0]); // James
-    output(myArray[1]); // John
-    output(myArray[2]); // Sue
+    let myDictionaryNumberKeys = {
+        7: "Seven",
+        11: "Eleven"
+    }
 
-    const mySecondArray = myArray;
-
-    output(mySecondArray[1]); // John
-
-    mySecondArray[1] = "Toby";
-
-    output(mySecondArray[1]); // Toby
-    output(myArray[1]); // Toby
-
-
-    // Value Variable 
-    let myVar = 42;
-
-    // Reference Variable
-    let myReferenceArray = ["Hello", "World"];
-    // When we create an array, the array itself isn't "stored" in the variable. It is stored elsewhere in the computer's memory.
-    // The address to that "elsewhere" is what is stored in the variable (kind of like a forwarding address).
-
-    // The spread operator allows us to "clone" an array.
-    let clonedArray = [...myArray];
-    // Before the spread operator was introduced, an array could be cloned by passing no arguments to slice.
-    let anotherClone = myArray.slice();
-
-    clonedArray[1] = "Anne";
-
-    output(clonedArray[1]); // Toby
-    output(myArray[1]); // Toby
-
-    let combinedArray = myArray.concat(myReferenceArray);
-    let mySpreadCombinedArray = [...myArray, ...myReferenceArray];
-
-    combinedArray.sort();
+    output(myDictionaryNumberKeys[7]);
+    // This is a syntax error, you can't use the dot operator with numeric key names.
+    // output(myDictionaryNumberKeys.7);
 
 }
 
