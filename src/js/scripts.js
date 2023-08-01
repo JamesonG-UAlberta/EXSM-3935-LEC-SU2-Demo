@@ -1,29 +1,16 @@
 async function main() {
-    let myDictionary = {
-        Hello: "A greeting when you see somebody.",
-        Goodbye: "What you say when you leave.",
-        Pen: "A writing utensil using ink.",
-        Pencil: "A writing utensil using graphite."
-    }
+    let mySet = new Set(["First", "Second", "Third", "Third", "Fourth"]);
 
-    output(myDictionary.Hello);
-    output(myDictionary["Hello"]);
-
-    let myDictionaryNumbers = {
-        Pi: 3.14,
-        Array: [1, 2, 3, 5, 7, 9, 11, 15],
-        Boolean: false
-    }
-
-    let myDictionaryNumberKeys = {
-        7: "Seven",
-        11: "Eleven"
-    }
-
-    output(myDictionaryNumberKeys[7]);
-    // This is a syntax error, you can't use the dot operator with numeric key names.
-    // output(myDictionaryNumberKeys.7);
-
+    // Sets are used to maintain a lack of duplicate items in an "array".
+    // To access the values, you have to store an "iterator", and pull the items out one by one.
+    // Until we learn loops, this is the way it must be done.
+    // Note that the second instance of "Third" was rejected as a duplicate, and the fifth call of .next() gives us undefined as there are only 4 items stored.
+    const valuesInSet = mySet.values();
+    output(valuesInSet.next().value);
+    output(valuesInSet.next().value);
+    output(valuesInSet.next().value);
+    output(valuesInSet.next().value);
+    output(valuesInSet.next().value);
 }
 
 
