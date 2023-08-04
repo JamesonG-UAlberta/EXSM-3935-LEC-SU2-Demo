@@ -3,11 +3,21 @@ async function main() {
         Hello: "A greeting when you see somebody.",
         Goodbye: "What you say when you leave.",
         Pen: "A writing utensil using ink.",
-        Pencil: "A writing utensil using graphite."
+        Pencil: "A writing utensil using graphite.",
+        DoesntExist: false
     }
 
     output(myDictionary.Hello);
     output(myDictionary["Hello"]);
+
+    if (myDictionary.DoesntExist !== undefined)
+    {
+        output("It exists.");
+    }
+    else
+    {
+        output("It doesn't exist.");
+    }
 
     let myDictionaryNumbers = {
         Pi: 3.14,
