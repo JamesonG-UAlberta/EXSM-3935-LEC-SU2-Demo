@@ -1,13 +1,17 @@
 async function main() {
-    // This is where the code you're actually experimenting with goes.
-    
-    let prompt = "Please enter your name, or 'Exit' to quit: "
-    let name = await input(prompt);
 
-    while (name != "Exit") 
+    try
     {
-        output("Hello, "+name+"!");
-        name = await input(prompt);
+        let orderNumber = await input("Please enter your 6 character order number: ");
+        if (!orderNumber.match(/^[a-zA-Z0-9]{6}$/g))
+        {
+            throw new Error("Your order number is invalid. It must be 6 alphanumeric characters.");
+        }
+        output(orderNumber);
+    }
+    catch (exception)
+    {
+        output(exception.message);
     }
 }
 
