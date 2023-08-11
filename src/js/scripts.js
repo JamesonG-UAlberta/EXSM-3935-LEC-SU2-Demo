@@ -1,59 +1,36 @@
 async function main() {
-    output("1");
-    output("2");
-    myFunction();
-    output("3");
-    // Values going into parameters are called arguments.
-    myFunctionWithParameters("Hello", "World");
-    myFunctionWithParameters("first", "second");
-    output("4");
-    myFunctionWithReturn();
-    output(myFunctionWithReturn());
-    let returnOfFunction = myFunctionWithReturn();
-    output(`Value stored in returnOfFunction: ${returnOfFunction}`);
-    await input("This is main, please enter your name: ");
-    const operator = await input("Please enter a operator: ");
-    const left = await input("Please enter a left operand: ");
-    const right = await input("Please enter a right operand: ");
-    output(`The result is ${calculator(operator, left, right)}.`);
-}
-// No Inputs, No Outputs (Mainly for Console Display)
-function myFunction() {
-    output("This is a function!");
-    output("Hello, world!");
-}
-// Inputs, No Outputs
-// Local variables declared for the lifespan of the function and populated with arguments are called parameters.
-function myFunctionWithParameters(firstParameter, secondParameter) {
-    output("Function Begin");
-    // Because these are displaying parameters, the function can be called with different arguments, and what is displayed will be different.
-    output(`firstParameter: ${firstParameter}`);
-    output(`secondParameter: ${secondParameter}`);
-    output("Function End");
-}
-// No Inputs, Outputs
-function myFunctionWithReturn() {
-    output("Returning an approximation of Pi.");
-    return 3.14;
+    try {
+        // Await is necessary for our functions with inputs to avoid concurrent inputs.
+        const operator = await getValidInput("Please enter a operator: ");
+        const left = await getValidInput("Please enter a left operand: ");
+        const right = await getValidInput("Please enter a right operand: ");    
+        output(`The result is ${calculator(operator, left, right)}.`);
+    }
+    catch (exception) {
+        output("ERROR: "+exception);
+    }
+    
 }
 // Inputs and Outputs
-function calculator(operator, leftOperand, rightOperand)
-{
+function calculator(operator, leftOperand, rightOperand) {
     let result;
-    const trimmedOperator = operator.trim();
-    if (trimmedOperator == "+")
+    // Parameters, at the end of the day, behave like local variables. So we can reassign / format them as needed.
+    operator = operator.trim();
+    leftOperand = Number(leftOperand);
+    rightOperand = Number(rightOperand);
+    if (operator == "+")
     {
         result = leftOperand + rightOperand;
     }
-    else if (trimmedOperator == "-")
+    else if (operator == "-")
     {
-        result = leftOperand - rightOperand;
+        result = operator - rightOperand;
     }
-    else if (trimmedOperator == "*")
+    else if (operator == "*")
     {
         result = leftOperand * rightOperand;
     }
-    else if (trimmedOperator == "/")
+    else if (operator == "/")
     {
         result = leftOperand / rightOperand;
     }
@@ -62,4 +39,13 @@ function calculator(operator, leftOperand, rightOperand)
         result = NaN;
     }
     return result;
+}
+// async is necessary if we are using input.
+async function getValidInput(prompt) {
+    const userInput = await input(prompt);
+    if (userInput.trim() == "")
+    {
+        throw new Error("You did not enter a value.");
+    }
+    return userInput;
 }
