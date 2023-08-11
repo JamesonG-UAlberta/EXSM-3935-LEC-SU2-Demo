@@ -1,21 +1,5 @@
 async function main() {
-    output("1");
-    output("2");
-    myFunction();
-    output("3");
-    // Values going into parameters are called arguments.
-    myFunctionWithParameters("Hello", "World");
-    myFunctionWithParameters("first", "second");
-    output("4");
-    myFunctionWithReturn();
-    output(myFunctionWithReturn());
-    let returnOfFunction = myFunctionWithReturn();
-    output(`Value stored in returnOfFunction: ${returnOfFunction}`);
-    await input("This is main, please enter your name: ");
-    const operator = await input("Please enter a operator: ");
-    const left = await input("Please enter a left operand: ");
-    const right = await input("Please enter a right operand: ");
-    output(`The result is ${calculator(operator, left, right)}.`);
+
 }
 // No Inputs, No Outputs (Mainly for Console Display)
 function myFunction() {
@@ -38,22 +22,24 @@ function myFunctionWithReturn() {
 }
 // Inputs and Outputs
 function calculator(operator, leftOperand, rightOperand)
-{
+{   
     let result;
-    const trimmedOperator = operator.trim();
-    if (trimmedOperator == "+")
+    leftOperand = Number(leftOperand);
+    rightOperand = Number(rightOperand);
+    operator = operator.trim();
+    if (operator == "+")
     {
         result = leftOperand + rightOperand;
     }
-    else if (trimmedOperator == "-")
+    else if (operator == "-")
     {
         result = leftOperand - rightOperand;
     }
-    else if (trimmedOperator == "*")
+    else if (operator == "*")
     {
         result = leftOperand * rightOperand;
     }
-    else if (trimmedOperator == "/")
+    else if (operator == "/")
     {
         result = leftOperand / rightOperand;
     }
