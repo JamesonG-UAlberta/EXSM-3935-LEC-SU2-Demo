@@ -7,16 +7,18 @@ async function main() {
     let name = await input(prompt);
 
     // Test
-    // While loops are just like decisions - you can replace the word "while" with "if" and it will function just fine.
-    // The caveat is that "while" will run again as soon as it's done (including the test).
-    while (name != "Exit") 
+    // Do-While loops are just like while loops except they run 1 or more times.
+    // While loops run 0 or more times.
+    // This means the code block of a do-while loop will always at least once run even if the condition is false at the start,
+    // and continues to be false until the test. 
+    do
     {
         // Process
         output("Hello, "+name+"!");
         // Modify
         // You MUST modify at least one variable used in your condition to avoid infinite loops (somewhere in the loop).
         name = await input(prompt);
-    }
+    } while (name != "Exit");
 }
 
 
