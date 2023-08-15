@@ -1,14 +1,33 @@
 async function main() {
-    // This is where the code you're actually experimenting with goes.
-    
-    let prompt = "Please enter your name, or 'Exit' to quit: "
-    let name = await input(prompt);
-
-    while (name != "Exit") 
+    const player1Token = "X";
+    const player2Token = "O";
+    const gameBoard = [
+        ["","",""],
+        ["","",""],
+        ["","",""]
+    ];
+    let playerTurn = player1Token;
+    let menuChoice;
+    do
     {
-        output("Hello, "+name+"!");
-        name = await input(prompt);
-    }
+        output("--- Welcome to Tic-Tac-Toe ---");
+        output("1. Play a Game");
+        output("2. Exit");
+        menuChoice = (await input ("Please make a selection: ")).trim();
+        if (menuChoice == "1")
+        {
+            output("Playing game...");
+        }
+        else if (menuChoice == "2")
+        {
+            output("Thank you for playing, please come again!");
+        }
+        else 
+        {
+            output("Invalid menu choice, please try again.");
+        }
+    } while (menuChoice != "2");
+
 }
 
 
