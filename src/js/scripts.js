@@ -64,33 +64,29 @@ async function playGame() {
     }
 } 
 function checkWin(gameBoard) {
-    let state;
-    if (
-        // Top Horizontal Line
-        (gameBoard["1"] == gameBoard["2"] && gameBoard["1"] == gameBoard["3"]) || 
-        // Middle Horizontal Line
-        (gameBoard["4"] == gameBoard["5"] && gameBoard["4"] == gameBoard["6"]) || 
-        // Bottom Horizontal Line
-        (gameBoard["7"] == gameBoard["8"] && gameBoard["7"] == gameBoard["9"]) || 
-        // Left Vertical Line
-        (gameBoard["1"] == gameBoard["4"] && gameBoard["1"] == gameBoard["7"]) || 
-        // Middle Vertical Line
-        (gameBoard["2"] == gameBoard["5"] && gameBoard["2"] == gameBoard["8"]) || 
-        // Right Vertical Line
-        (gameBoard["3"] == gameBoard["6"] && gameBoard["3"] == gameBoard["9"]) || 
-        // NW-SE Diagonal
-        (gameBoard["1"] == gameBoard["5"] && gameBoard["1"] == gameBoard["9"]) || 
-        // NE-SW Diagonal
-        (gameBoard["3"] == gameBoard["5"] && gameBoard["3"] == gameBoard["7"])
-    )
+    const winningRows = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"],
+        ["1", "4", "7"],
+        ["2", "5", "8"],
+        ["3", "6", "9"],
+        ["1", "5", "9"],
+        ["3", "5", "7"]
+    ]
+    let isWin = false;
+    for (let winningRowIndex = 0; winningRowIndex < winningRows.length && !isWin; winningRowIndex++)
     {
-        state = true;
+        isWin = true;
+        for (let winningSpace of winningRows[winningRowIndex])
+        {
+            if (gameBoard[winningRows[winningRowIndex][0]] != gameBoard[winningSpace])
+            {
+                isWin = false;
+            }
+        }
     }
-    else
-    {
-        state = false;
-    }
-    return state;
+    return isWin;
 }
 function displayBoard(gameBoard) {
     output("-------------");
