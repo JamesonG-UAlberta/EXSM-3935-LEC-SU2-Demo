@@ -1,12 +1,4 @@
 async function main() {
-    const player1Token = "X";
-    const player2Token = "O";
-    const gameBoard = [
-        ["","",""],
-        ["","",""],
-        ["","",""]
-    ];
-    let playerTurn = player1Token;
     let menuChoice;
     do
     {
@@ -16,7 +8,7 @@ async function main() {
         menuChoice = (await input ("Please make a selection: ")).trim();
         if (menuChoice == "1")
         {
-            output("Playing game...");
+            await playGame();
         }
         else if (menuChoice == "2")
         {
@@ -29,5 +21,116 @@ async function main() {
     } while (menuChoice != "2");
 
 }
-
-
+async function playGame() {
+    const player1Token = "X";
+    const player2Token = "O";
+    const gameBoard = [
+        ["1","2","3"],
+        ["4","5","6"],
+        ["7","8","9"]
+    ];
+    let playerTurn = player1Token;
+    let turnCount = 1;
+    while (!checkWin(gameBoard) && turnCount <= 9)
+    {
+        displayBoard(gameBoard);
+        let playerSpace;
+        do {
+            playerSpace = (await input (`Player ${playerTurn}, please enter the space you would to play: `)).trim();
+            if (!["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(playerSpace))
+            {
+                output("Invalid input, please make another selection.");
+            }
+        } while (!["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(playerSpace));
+        if (playerSpace == "1" && gameBoard[0][0] == "1")
+        {
+            gameBoard[0][0] = playerTurn;
+        }
+        else if (playerSpace == "2" && gameBoard[0][1] == "2")
+        {
+            gameBoard[0][1] = playerTurn;
+        }
+        else if (playerSpace == "3" && gameBoard[0][2] == "3")
+        {
+            gameBoard[0][2] = playerTurn;
+        }
+        else if (playerSpace == "4" && gameBoard[1][0] == "4")
+        {
+            gameBoard[1][0] = playerTurn;
+        }
+        else if (playerSpace == "5" && gameBoard[1][1] == "5")
+        {
+            gameBoard[1][1] = playerTurn;
+        }
+        else if (playerSpace == "6" && gameBoard[1][2] == "6")
+        {
+            gameBoard[1][2] = playerTurn;
+        }
+        else if (playerSpace == "7" && gameBoard[2][0] == "7")
+        {
+            gameBoard[2][0] = playerTurn;
+        }
+        else if (playerSpace == "8" && gameBoard[2][1] == "8")
+        {
+            gameBoard[2][1] = playerTurn;
+        }
+        else if (playerSpace == "9" && gameBoard[2][2] == "9")
+        {
+            gameBoard[2][2] = playerTurn;
+        }
+        else
+        {
+            // TODO: Add validation that the space isn't already taken and repeat turn if so.
+        }
+        playerTurn = playerTurn == player1Token ? player2Token : player1Token;
+        turnCount++;
+    }
+    displayBoard(gameBoard);
+    if (checkWin(gameBoard))
+    {
+        playerTurn = playerTurn == player1Token ? player2Token : player1Token;
+        output(`Congratulations Player ${playerTurn}! Returning to Main Menu.`);
+    }
+    else
+    {
+        output(`The game ended in a draw. Returning to Main Menu.`);
+    }
+} 
+function checkWin(gameBoard) {
+    let state;
+    if (
+        // Top Horizontal Line
+        (gameBoard[0][0] == gameBoard[0][1] && gameBoard[0][0] == gameBoard[0][2]) || 
+        // Middle Horizontal Line
+        (gameBoard[1][0] == gameBoard[1][1] && gameBoard[1][0] == gameBoard[1][2]) || 
+        // Bottom Horizontal Line
+        (gameBoard[2][0] == gameBoard[2][1] && gameBoard[2][0] == gameBoard[2][2]) || 
+        // Left Vertical Line
+        (gameBoard[0][0] == gameBoard[1][0] && gameBoard[0][0] == gameBoard[2][0]) || 
+        // Middle Vertical Line
+        (gameBoard[0][1] == gameBoard[1][1] && gameBoard[0][1] == gameBoard[2][1]) || 
+        // Right Vertical Line
+        (gameBoard[0][2] == gameBoard[1][2] && gameBoard[0][2] == gameBoard[2][2]) || 
+        // NW-SE Diagonal
+        (gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2]) || 
+        // NE-SW Diagonal
+        (gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0])
+    )
+    {
+        state = true;
+    }
+    else
+    {
+        state = false;
+    }
+    return state;
+}
+function displayBoard(gameBoard) {
+    output("-------------");
+    output(`| ${gameBoard[0][0]} | ${gameBoard[0][1]} | ${gameBoard[0][2]} |`);
+    output("-------------");
+    output(`| ${gameBoard[1][0]} | ${gameBoard[1][1]} | ${gameBoard[1][2]} |`);
+    output("-------------");
+    output(`| ${gameBoard[2][0]} | ${gameBoard[2][1]} | ${gameBoard[2][2]} |`);
+    output("-------------");
+}
