@@ -4,7 +4,7 @@ async function main() {
     let prompt = "Please enter your name, or 'Exit' to quit: "
     
     // Initialize
-    let name = await input(prompt);
+    let name;
 
     // Test
     // Do-While loops are just like while loops except they run 1 or more times.
@@ -13,11 +13,11 @@ async function main() {
     // and continues to be false until the test. 
     do
     {
-        // Process
-        output("Hello, "+name+"!");
         // Modify
         // You MUST modify at least one variable used in your condition to avoid infinite loops (somewhere in the loop).
         name = await input(prompt);
+        // Process
+        output("Hello, "+name+"!");
     } while (name != "Exit");
 }
 
