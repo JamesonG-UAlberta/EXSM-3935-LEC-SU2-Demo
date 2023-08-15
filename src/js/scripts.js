@@ -29,6 +29,7 @@ async function playGame() {
         ["4","5","6"],
         ["7","8","9"]
     ];
+    const availableSpaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     let playerTurn = player1Token;
     let turnCount = 1;
     while (!checkWin(gameBoard) && turnCount <= 9)
@@ -37,11 +38,12 @@ async function playGame() {
         let playerSpace;
         do {
             playerSpace = (await input (`Player ${playerTurn}, please enter the space you would to play: `)).trim();
-            if (!["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(playerSpace))
+            if (!availableSpaces.includes(playerSpace))
             {
                 output("Invalid input, please make another selection.");
             }
-        } while (!["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(playerSpace));
+        } while (!availableSpaces.includes(playerSpace));
+        availableSpaces.splice(availableSpaces.indexOf(playerSpace), 1);
         if (playerSpace == "1" && gameBoard[0][0] == "1")
         {
             gameBoard[0][0] = playerTurn;
@@ -77,10 +79,6 @@ async function playGame() {
         else if (playerSpace == "9" && gameBoard[2][2] == "9")
         {
             gameBoard[2][2] = playerTurn;
-        }
-        else
-        {
-            // TODO: Add validation that the space isn't already taken and repeat turn if so.
         }
         playerTurn = playerTurn == player1Token ? player2Token : player1Token;
         turnCount++;
