@@ -32,15 +32,23 @@ async function main() {
     output("Goodbye!");
 }
 function stringChecker(input) {
-    return true;
+    return !(/\d/).test(input);
 }
 function integerChecker(input) {
-    return true;
+    return (/^\d+$/).test(input);
 }
 function yearChecker(input) {
-    return true;
+    return (/^\d+$/).test(input) && Number(input) >= 1900 && Number(input) <= new Date().getFullYear();
 }
 function dateChecker(input) {
-    return true;
+    const datePieces = input.split("-");
+    return yearChecker(datePieces[0]) &&
+    (/^\d+$/).test(datePieces[1]) &&
+    Number(datePieces[1]) >= 1 &&
+    Number(datePieces[1]) <= 12 &&
+    (/^\d+$/).test(datePieces[2]) &&
+    Number(datePieces[2]) >= 1 &&
+    Number(datePieces[2]) <= 31 &&
+    datePieces.length == 3;
 }
 
