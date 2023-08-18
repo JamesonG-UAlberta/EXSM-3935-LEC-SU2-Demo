@@ -11,31 +11,7 @@ async function main() {
     {
         try
         {  
-            let username = (await input("Please enter your username: ")).trim();
-            if (username == "")
-            {
-                throw Error("The username cannot be empty.");
-            }
-            else if (accounts[username]) 
-            {
-                throw Error("The username exists.");
-            }
-            else
-            {
-                let password = await input("Please enter your password: ");
-                if (password == "")
-                {
-                    throw Error("The password cannot be empty.");
-                }
-                else if (password.length < 8)
-                {
-                    throw Error("The password is too short.");
-                }
-                else
-                {
-                    accounts[username] = password;
-                }
-            }
+            await register(accounts);
         }
         catch (exception)
         {
@@ -46,35 +22,7 @@ async function main() {
     {
         try
         {  
-            let username = (await input("Please enter your username: ")).trim();
-            if (username == "")
-            {
-                throw Error("The username cannot be empty.");
-            }
-            else if (!accounts[username]) 
-            {
-                throw Error("The username does not exist.");
-            }
-            else
-            {
-                let password = await input("Please enter your password: ");
-                if (password == "")
-                {
-                    throw Error("The password cannot be empty.");
-                }
-                else if (password.length < 8)
-                {
-                    throw Error("The password is too short.");
-                }
-                else if (accounts[username] != password)
-                {
-                    throw Error("The password is incorrect.");
-                }
-                else
-                {
-                    output(`Welcome, ${username}!`);
-                }
-            }
+            await login(accounts);
         }
         catch (exception)
         {
@@ -96,9 +44,53 @@ function validatePassword(password) {
     return password.length >= 8;
 }
 
-async function register() {
-
+async function register(accounts) {
+    let username = (await input("Please enter your username: ")).trim();
+    if (username == "")
+    {
+        throw Error("The username cannot be empty.");
+    }
+    else if (accounts[username]) 
+    {
+        throw Error("The username exists.");
+    }
+    else
+    {
+        let password = await input("Please enter your password: ");
+        if (!validatePassword(password))
+        {
+            throw Error("The password must be 8 or more characters long.");
+        }
+        else
+        {
+            accounts[username] = password;
+        }
+    }
 }
-async function login() {
-
+async function login(accounts) {
+    let username = (await input("Please enter your username: ")).trim();
+    if (username == "")
+    {
+        throw Error("The username cannot be empty.");
+    }
+    else if (!accounts[username]) 
+    {
+        throw Error("The username does not exist.");
+    }
+    else
+    {
+        let password = await input("Please enter your password: ");
+        if (!validatePassword(password))
+        {
+            throw Error("The password must be 8 or more characters long.");
+        }
+        else if (accounts[username] != password)
+        {
+            throw Error("The password is incorrect.");
+        }
+        else
+        {
+            output(`Welcome, ${username}!`);
+        }
+    }
 }
