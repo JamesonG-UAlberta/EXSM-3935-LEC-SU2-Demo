@@ -90,5 +90,15 @@ async function main() {
         output("Invalid choice. Exiting.");
     }
 }
+// Arrow function:
+//const validatePassword = (password) => password.length >= 8;
+function validatePassword(password) {
+    return password.length >= 8;
+}
 
+async function register() {
 
+}
+async function login() {
+
+}
